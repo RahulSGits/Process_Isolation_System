@@ -1,0 +1,16 @@
+{
+  "name": "Process Isolation System",
+  "short_name": "ProcessOS",
+  "description": "Advanced OS Scheduling & Resource Management",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f23",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='25' y='25' width='50' height='50' fill='%238b5cf6' stroke='%23ffffff' stroke-width='2'/><rect x='35' y='15' width='30' height='10' fill='%238b5cf6'/><rect x='35' y='75' width='30' height='10' fill='%238b5cf6'/><rect x='15' y='35' width='10' height='30' fill='%238b5cf6'/><rect x='75' y='35' width='10' height='30' fill='%238b5cf6'/></svg>",
+      "sizes": "100x100",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Isolation & OS Scheduling System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='25' y='25' width='50' height='50' fill='%238b5cf6' stroke='%23ffffff' stroke-width='2'/><rect x='35' y='15' width='30' height='10' fill='%238b5cf6'/><rect x='35' y='75' width='30' height='10' fill='%238b5cf6'/><rect x='15' y='35' width='10' height='30' fill='%238b5cf6'/><rect x='75' y='35' width='10' height='30' fill='%238b5cf6'/><circle cx='40' cy='40' r='3' fill='%2310b981'/><circle cx='60' cy='40' r='3' fill='%2310b981'/><circle cx='40' cy='60' r='3' fill='%2310b981'/><circle cx='60' cy='60' r='3' fill='%2310b981'/></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-microchip"></i> Process Isolation System</h1>
+                    <p>Advanced OS Scheduling & Resource Management</p>
+                </div>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="tabs">
+            <div class="container">
+                <button class="tab active" data-tab="overview">Overview</button>
+                <button class="tab" data-tab="dashboard">Dashboard</button>
+                <button class="tab" data-tab="processes">Processes</button>
+                <button class="tab" data-tab="scheduler">Scheduler</button>
+                <button class="tab" data-tab="sandbox">Sandbox</button>
+                <button class="tab" data-tab="metrics">Metrics</button>
+                <button class="tab" data-tab="deadlock">Deadlock</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-accent"></i>
+                            <span class="font-semibold">Operational</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p class="text-sm text-muted">Active Processes</p>
+                        <p class="text-2xl font-bold text-primary" id="active-processes-count">0</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p class="text-sm text-muted">Scheduling Algorithm</p>
+                        <div class="badge badge-secondary mt-2">Round Robin</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-sitemap"></i> Core Components</h2>
+                    <p class="card-description">System architecture overview</p>
+                </div>
+                <div class="card-content">
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-muted/50 rounded-md">
+                            <i class="fas fa-bolt text-primary mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">CPU Scheduler</p>
+                                <p class="text-xs text-muted">Manages process scheduling with FIFO, SJF, RR, and Priority algorithms</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-muted/50 rounded-md">
+                            <i class="fas fa-bolt text-secondary mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">Memory Manager</p>
+                                <p class="text-xs text-muted">Allocates and manages process memory with isolation</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-muted/50 rounded-md">
+                            <i class="fas fa-bolt text-accent mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">I/O Manager</p>
+                                <p class="text-xs text-muted">Handles input/output operations and resource management</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-muted/50 rounded-md">
+                            <i class="fas fa-bolt text-chart-1 mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">Deadlock Detector</p>
+                                <p class="text-xs text-muted">Detects and recovers from circular wait conditions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-code"></i> Supported Programming Languages</h2>
+                    <p class="card-description">Code execution and isolation environments</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                        <div class="badge badge-primary justify-center py-2"><i class="fab fa-python"></i> Python</div>
+                        <div class="badge badge-secondary justify-center py-2"><i class="fab fa-java"></i> Java</div>
+                        <div class="badge badge-accent justify-center py-2"><i class="fas fa-c"></i> C</div>
+                        <div class="badge badge-outline justify-center py-2"><i class="fab fa-html5"></i> HTML</div>
+                        <div class="badge badge-outline justify-center py-2"><i class="fab fa-css3"></i> CSS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="text-sm text-muted">CPU Utilization</p>
+                        <p class="text-2xl font-bold text-primary" id="cpu-utilization">0%</p>
+                        <p class="text-xs text-muted mt-1" id="cpu-source">Real-time usage</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p class="text-sm text-muted">Active Processes</p>
+                        <p class="text-2xl font-bold text-secondary" id="dashboard-process-count">0</p>
+                        <p class="text-xs text-muted mt-1">Created processes</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p class="text-sm text-muted">Total Memory</p>
+                        <p class="text-2xl font-bold text-accent" id="total-memory">0MB</p>
+                        <p class="text-xs text-muted mt-1">Total allocation</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p class="text-sm text-muted">Avg Turnaround</p>
+                        <p class="text-2xl font-bold text-chart-1" id="avg-turnaround">0ms</p>
+                        <p class="text-xs text-muted mt-1">Average time per process</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-chart-line"></i> CPU & Memory Timeline</h2>
+                        <p class="card-description">Real-time resource utilization</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="cpu-memory-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-chart-bar"></i> Algorithm Performance</h2>
+                        <p class="card-description">Turnaround time by scheduling algorithm</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="algorithm-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-tachometer-alt"></i> System Performance Metrics</h2>
+                    <p class="card-description" id="metrics-description">Scheduler efficiency indicators</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="space-y-2">
+                            <p class="text-sm text-muted">Avg Turnaround Time</p>
+                            <p class="text-xl font-semibold text-chart-3" id="avg-turnaround-time">0ms</p>
+                        </div>
+                        <div class="space-y-2">
+                            <p class="text-sm text-muted">Avg Waiting Time</p>
+                            <p class="text-xl font-semibold text-chart-1" id="avg-waiting-time">0ms</p>
+                        </div>
+                        <div class="space-y-2">
+                            <p class="text-sm text-muted">Context Switches</p>
+                            <p class="text-xl font-semibold text-accent" id="context-switches">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processes Tab -->
+        <div id="processes" class="tab-content">
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-plus-circle"></i> Create New Process</h2>
+                    <p class="card-description">Configure and spawn a new process for the system</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <input type="text" id="process-name" placeholder="Process name" class="md:col-span-2 form-input">
+                        <select id="process-language" class="form-select">
+                            <option value="PYTHON">Python</option>
+                            <option value="JAVA">Java</option>
+                            <option value="C">C</option>
+                            <option value="HTML">HTML</option>
+                            <option value="CSS">CSS</option>
+                        </select>
+                        <input type="number" id="burst-time" placeholder="Burst time (ms)" min="1" max="100" value="5" class="form-input">
+                        <input type="number" id="process-priority" placeholder="Priority (1-10)" min="1" max="10" value="5" class="form-input">
+                        <button id="create-process" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-tasks"></i> Active Processes</h2>
+                    <p class="card-description">Monitor and control running processes (<span id="process-count">0</span> active)</p>
+                </div>
+                <div class="card-content">
+                    <div id="process-list">
+                        <div class="flex items-center justify-center py-12 border border-dashed border-border rounded-md">
+                            <p class="text-muted">No processes created yet. Create one to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-chart-pie"></i> Process Statistics</h2>
+                    <p class="card-description">Summary of all active processes</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Total Processes</p>
+                            <p class="text-2xl font-bold text-primary" id="total-processes">0</p>
+                        </div>
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Running</p>
+                            <p class="text-2xl font-bold text-accent" id="running-processes">0</p>
+                        </div>
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Ready</p>
+                            <p class="text-2xl font-bold text-primary" id="ready-processes">0</p>
+                        </div>
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Total Memory</p>
+                            <p class="text-2xl font-bold text-secondary" id="total-process-memory">0MB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scheduler Tab -->
+        <div id="scheduler" class="tab-content">
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-cogs"></i> Scheduling Algorithm Selection</h2>
+                    <p class="card-description">Choose and configure the scheduling algorithm for simulation</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                        <button class="btn btn-outline scheduler-algorithm active" data-algorithm="FIFO">FIFO</button>
+                        <button class="btn btn-outline scheduler-algorithm" data-algorithm="SJF">SJF</button>
+                        <button class="btn btn-outline scheduler-algorithm" data-algorithm="ROUND_ROBIN">Round Robin</button>
+                        <button class="btn btn-outline scheduler-algorithm" data-algorithm="PRIORITY">Priority</button>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="run-simulation" class="btn btn-secondary btn-full">Run Simulation</button>
+                        <button id="show-steps" class="btn btn-outline">Show Steps</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="algorithm-steps-container" class="card mb-6 hidden">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-list-ol"></i> Algorithm Execution Steps</h2>
+                    <p class="card-description">Step-by-step execution of <span id="steps-algorithm-name">FIFO</span> algorithm</p>
+                </div>
+                <div class="card-content">
+                    <div class="algorithm-steps" id="algorithm-steps">
+                        <!-- Algorithm steps will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="simulation-results" class="hidden">
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-chart-bar"></i> Gantt Chart - Process Scheduling</h2>
+                        <p class="card-description">Visual representation of process execution timeline</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="gantt-chart" id="gantt-chart">
+                            <!-- Gantt chart will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-chart-line"></i> Scheduling Metrics</h2>
+                        <p class="card-description">Performance analysis of <span id="selected-algorithm">FIFO</span> algorithm</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="bg-muted/50 rounded-md p-4">
+                                <p class="text-sm text-muted">Avg Waiting Time</p>
+                                <p class="text-xl font-bold text-primary" id="sim-avg-waiting">0ms</p>
+                            </div>
+                            <div class="bg-muted/50 rounded-md p-4">
+                                <p class="text-sm text-muted">Avg Turnaround Time</p>
+                                <p class="text-xl font-bold text-secondary" id="sim-avg-turnaround">0ms</p>
+                            </div>
+                            <div class="bg-muted/50 rounded-md p-4">
+                                <p class="text-sm text-muted">Context Switches</p>
+                                <p class="text-xl font-bold text-accent" id="sim-context-switches">0</p>
+                            </div>
+                            <div class="bg-muted/50 rounded-md p-4">
+                                <p class="text-sm text-muted">CPU Utilization</p>
+                                <p class="text-xl font-bold text-chart-1" id="sim-cpu-utilization">0%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-list"></i> Active Processes for Scheduling</h2>
+                    <p class="card-description">Processes available for simulation</p>
+                </div>
+                <div class="card-content">
+                    <div id="scheduler-process-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Processes for scheduling will be listed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sandbox Tab -->
+        <div id="sandbox" class="tab-content">
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-code"></i> Secure Code Sandbox</h2>
+                    <p class="card-description">Execute code in an isolated process environment with safety constraints</p>
+                </div>
+                <div class="card-content">
+                    <div class="space-y-4">
+                        <div class="form-group">
+                            <label class="form-label">Load Process Code</label>
+                            <select id="sandbox-process-select" class="form-select">
+                                <option value="">-- Select a process --</option>
+                            </select>
+                        </div>
+                        <div class="flex gap-4 flex-wrap">
+                            <button class="btn btn-outline sandbox-language active" data-language="PYTHON">Python</button>
+                            <button class="btn btn-outline sandbox-language" data-language="JAVA">Java</button>
+                            <button class="btn btn-outline sandbox-language" data-language="C">C</button>
+                            <button class="btn btn-outline sandbox-language" data-language="HTML">HTML</button>
+                            <button class="btn btn-outline sandbox-language" data-language="CSS">CSS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-6">
+                <div class="card-header">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h2 class="card-title"><i class="fas fa-edit"></i> Code Editor</h2>
+                            <p class="card-description">Write your process code</p>
+                        </div>
+                        <div class="badge badge-outline" id="sandbox-language-badge">Python</div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="code-editor">
+                        <div class="code-editor-header">
+                            <span>code.py</span>
+                        </div>
+                        <div class="code-editor-content">
+                            <textarea id="code-input" class="code-textarea"># Enter your code here
+print("Hello from isolated process!")</textarea>
+                        </div>
+                    </div>
+                    <button id="execute-code" class="btn btn-accent btn-full mt-4">
+                        <i class="fas fa-play-circle"></i>
+                        Execute Code
+                    </button>
+                </div>
+            </div>
+
+            <div id="execution-result" class="hidden">
+                <div class="card mb-6">
+                    <div class="card-header">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h2 class="card-title"><i class="fas fa-terminal"></i> Execution Result</h2>
+                                <p class="card-description">Process output and metrics</p>
+                            </div>
+                            <div id="execution-status-badge" class="badge badge-accent">
+                                <i class="fas fa-check-circle"></i> Success
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content space-y-4">
+                        <div>
+                            <p class="text-sm text-muted mb-2">Output:</p>
+                            <div id="execution-output" class="bg-muted/50 border border-border rounded-md p-4 font-mono text-sm whitespace-pre-wrap break-words max-h-48 overflow-y-auto">
+                                (No output)
+                            </div>
+                        </div>
+                        <div id="execution-error" class="hidden">
+                            <p class="text-sm text-destructive mb-2">Error:</p>
+                            <div class="bg-destructive/10 border border-destructive/30 rounded-md p-4 font-mono text-sm text-destructive whitespace-pre-wrap break-words">
+                                Error message will appear here
+                            </div>
+                        </div>
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Execution Time</p>
+                            <p class="text-xl font-bold text-primary mt-1" id="execution-time">0ms</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-shield-alt"></i> Sandbox Security Features</h2>
+                    <p class="card-description">Built-in protection mechanisms</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex gap-3">
+                            <i class="fas fa-check-circle text-accent mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">Resource Limits</p>
+                                <p class="text-xs text-muted">CPU, memory, and execution time constraints</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fas fa-check-circle text-accent mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">Isolation</p>
+                                <p class="text-xs text-muted">Complete process isolation from system</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fas fa-check-circle text-accent mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">No System Access</p>
+                                <p class="text-xs text-muted">Restricted file system and network access</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fas fa-check-circle text-accent mt-0.5"></i>
+                            <div>
+                                <p class="font-semibold">Timeout Protection</p>
+                                <p class="text-xs text-muted">Automatic termination on execution timeout</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Tab -->
+        <div id="metrics" class="tab-content">
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-chart-line"></i> Process Performance Metrics</h2>
+                    <p class="card-description">Detailed analysis of individual process execution</p>
+                </div>
+                <div class="card-content">
+                    <div id="metrics-process-list" class="space-y-3">
+                        <div class="flex items-center justify-center py-12 border border-dashed border-border rounded-md">
+                            <p class="text-muted">No processes created yet. Create processes in the Processes tab.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-chart-bar"></i> Algorithm Performance Over Time</h2>
+                    <p class="card-description">Comparison of waiting times across scheduling algorithms</p>
+                </div>
+                <div class="card-content">
+                    <div class="chart-container">
+                        <canvas id="metrics-algorithm-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-clock"></i> Average Waiting Time</h2>
+                        <p class="card-description">Algorithm comparison</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="waiting-time-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-hourglass-half"></i> Average Turnaround Time</h2>
+                        <p class="card-description">Algorithm comparison</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="turnaround-time-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deadlock Tab -->
+        <div id="deadlock" class="tab-content">
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-project-diagram"></i> Deadlock Detection & Recovery</h2>
+                    <p class="card-description">Real-time monitoring and resolution of circular wait conditions</p>
+                </div>
+                <div class="card-content">
+                    <div class="flex gap-2 flex-wrap">
+                        <button id="detect-deadlock" class="btn btn-primary flex items-center gap-2">
+                            <i class="fas fa-project-diagram"></i>
+                            Run Deadlock Analysis
+                        </button>
+                        <button id="toggle-monitoring" class="btn btn-outline">
+                            <i class="fas fa-circle"></i> Monitoring Active
+                        </button>
+                        <p id="no-processes-message" class="text-xs text-muted flex items-center hidden">
+                            Create processes in the Processes tab to analyze deadlocks
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-network-wired"></i> Resource Allocation Graph</h2>
+                        <p class="card-description">Process-resource relationships and potential cycles</p>
+                    </div>
+                    <div class="card-content">
+                        <div id="resource-allocation-graph" class="space-y-3">
+                            <!-- Resource allocation graph will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-shield-alt"></i> Deadlock Prevention Strategies</h2>
+                        <p class="card-description">Configured avoidance mechanisms</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3 p-3 bg-muted/50 rounded-md border border-border">
+                                <i class="fas fa-check-circle text-accent mt-0.5"></i>
+                                <div>
+                                    <p class="font-semibold text-sm">Hold and Wait Prevention</p>
+                                    <p class="text-xs text-muted mt-1">Processes request all resources before execution begins</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 bg-muted/50 rounded-md border border-border">
+                                <i class="fas fa-check-circle text-accent mt-0.5"></i>
+                                <div>
+                                    <p class="font-semibold text-sm">Circular Wait Prevention</p>
+                                    <p class="text-xs text-muted mt-1">Impose ordering on resource types</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 bg-muted/50 rounded-md border border-border">
+                                <i class="fas fa-check-circle text-accent mt-0.5"></i>
+                                <div>
+                                    <p class="font-semibold text-sm">Cycle Detection</p>
+                                    <p class="text-xs text-muted mt-1">Real-time wait-for graph analysis with DFS</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deadlock-events" class="hidden">
+                <div class="card mb-6 border-l-4 border-l-destructive">
+                    <div class="card-header">
+                        <h2 class="card-title flex items-center gap-2">
+                            <i class="fas fa-exclamation-circle text-destructive"></i>
+                            Detected Deadlock Events
+                        </h2>
+                        <p class="card-description">History and resolution of deadlock situations</p>
+                    </div>
+                    <div class="card-content">
+                        <div id="deadlock-events-list" class="space-y-3">
+                            <!-- Deadlock events will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-life-ring"></i> Deadlock Recovery Techniques</h2>
+                    <p class="card-description">Methods for system recovery from detected deadlocks</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <i class="fas fa-exclamation-triangle text-primary"></i>
+                                Process Termination
+                            </h4>
+                            <p class="text-xs text-muted">
+                                Abort one or more processes involved in the cycle. Safest approach but may lose work.
+                            </p>
+                            <div class="mt-3 text-xs bg-primary/10 border border-primary/20 rounded p-2 text-primary">
+                                Complexity: O(n) where n is number of processes in cycle
+                            </div>
+                        </div>
+                        <div class="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <i class="fas fa-exclamation-triangle text-secondary"></i>
+                                Resource Preemption
+                            </h4>
+                            <p class="text-xs text-muted">
+                                Preempt resources from one process and give to another. Challenging with non-preemptible resources.
+                            </p>
+                            <div class="mt-3 text-xs bg-secondary/10 border border-secondary/20 rounded p-2 text-secondary">
+                                Complexity: O(m) where m is number of resources
+                            </div>
+                        </div>
+                        <div class="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <i class="fas fa-exclamation-triangle text-accent"></i>
+                                Safe State Rollback
+                            </h4>
+                            <p class="text-xs text-muted">
+                                Rollback system to previous safe state. Requires checkpointing and logging system state.
+                            </p>
+                            <div class="mt-3 text-xs bg-accent/10 border border-accent/20 rounded p-2 text-accent">
+                                Complexity: O(log n) with binary search on checkpoints
+                            </div>
+                        </div>
+                        <div class="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <i class="fas fa-exclamation-triangle text-chart-4"></i>
+                                Optimal Resource Allocation
+                            </h4>
+                            <p class="text-xs text-muted">
+                                Reorganize resource allocation to break the cycle. Requires minimal process interruption.
+                            </p>
+                            <div class="mt-3 text-xs bg-chart-4/10 border border-chart-4/20 rounded p-2 text-chart-4">
+                                Complexity: O(n³) for graph optimization
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-chart-bar"></i> System Statistics</h2>
+                    <p class="card-description">Deadlock monitoring metrics</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Total Events</p>
+                            <p class="text-2xl font-bold text-primary" id="total-deadlock-events">0</p>
+                        </div>
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Resolved</p>
+                            <p class="text-2xl font-bold text-accent" id="resolved-deadlock-events">0</p>
+                        </div>
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Active</p>
+                            <p class="text-2xl font-bold text-destructive" id="active-deadlock-events">0</p>
+                        </div>
+                        <div class="bg-muted/50 rounded-md p-4">
+                            <p class="text-sm text-muted">Processes Tracked</p>
+                            <p class="text-2xl font-bold text-chart-1" id="deadlock-processes-tracked">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="code-templates.js"></script>
+    <script src="scheduler-algorithms.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
