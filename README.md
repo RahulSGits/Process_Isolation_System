@@ -97,6 +97,26 @@ This project is an interactive OS learning tool built entirely using frontend te
 - Practice safe code execution  
 
 ---
+## 📈 Impact
+This project makes Operating System concepts **visual**, **interactive**, and **real-world accurate**, effectively bridging the gap between **theory** and **practical learning**.
+
+---
+
+## 🤝 Contributing
+Contributions, feature requests, and pull requests are always welcome!  
+Feel free to open an issue or submit a PR.
+
+---
+
+## 📝 License
+This project is licensed under the **MIT License**.
+
+---
+
+## 📬 Contact
+**Developer:** Rahul Singh Bisht
+
+---
 
 ## 📁 Project Structure
 
