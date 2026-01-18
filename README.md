@@ -2,7 +2,7 @@
 
 A comprehensive web-based simulation platform that visualizes Operating System concepts such as **process management**, **CPU scheduling algorithms**, **resource allocation**, and **deadlock detection** — all in real time.
 
-🔗 **Live Demo:** https://isolation-sys.netlify.app/
+🔗 **Live Demo:** https://process-isolation-system.vercel.app/
 
 ---
 
